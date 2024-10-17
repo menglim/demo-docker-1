@@ -1,6 +1,8 @@
 services:
   myapp:
     image: myapp:latest
+    volumes:
+      - ${PWD}/logs:logs
     build:
       context: .
       dockerfile: Dockerfile
