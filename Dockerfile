@@ -21,7 +21,7 @@
 #ENTRYPOINT ["java", "-jar", "/app.jar"]
 
 # First stage: build the application
-FROM maven:3.9.7-jdk-17 AS build
+FROM maven:3.9.7-amazoncorretto-17 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
