@@ -7,15 +7,27 @@
 #CMD ["java","-jar", "app.jar"]
 
 # Stage 1: Build the JAR file
-FROM maven:3.9.7-amazoncorretto-21 AS build
+#FROM maven:3.9.7-amazoncorretto-21 AS build
+#WORKDIR /app
+#COPY pom.xml .
+#COPY src ./src
+#RUN mvn clean package -DskipTests
+#
+## Stage 2: Run the application
+#FROM openjdk:17
+#VOLUME /tmp
+#EXPOSE 8080
+#COPY --from=build /app/target/*.jar app.jar
+#ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+# First stage: build the application
+FROM maven:3.9.7-jdk-17 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
-RUN mvn clean package -DskipTests
+RUN mvn package -DskipTests
 
-# Stage 2: Run the application
-FROM openjdk:17
-VOLUME /tmp
-EXPOSE 8080
-COPY --from=build /app/target/*.jar app.jar
+# Second stage: create a slim image
+FROM openjdk:11-jre-slim
+COPY --from=build /app/target/*.jar /app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
