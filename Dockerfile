@@ -1,7 +1,21 @@
-FROM openjdk:17
+#FROM openjdk:17
+#
+#WORKDIR /app
+#
+#COPY target/*.jar app.jar
+#
+#CMD ["java","-jar", "app.jar"]
 
+# Stage 1: Build the JAR file
+FROM maven:3.9.7-amazoncorretto-21 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-COPY target/*.jar app.jar
-
-CMD ["java","-jar", "app.jar"]
+# Stage 2: Run the application
+FROM openjdk:17
+VOLUME /tmp
+EXPOSE 8080
+COPY --from=build /app/target/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
