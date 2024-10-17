@@ -28,6 +28,6 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Second stage: create a slim image
-FROM openjdk:11-jre-slim
+FROM openjdk:17-jre-slim
 COPY --from=build /app/target/*.jar /app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
