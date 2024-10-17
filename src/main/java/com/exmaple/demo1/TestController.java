@@ -22,6 +22,6 @@ public class TestController {
     @RequestMapping("/hello")
     public ResponseEntity<Object> getHello() {
         log.info("Accessing via Hello. AppVersion " + appVersion + ". Env " + activeProfile.toUpperCase() + " at " + new Date());
-        return ResponseEntity.ok(new Hello("Hello "));
+        return ResponseEntity.ok(new Hello("Hello " + appVersion));
     }
 }
