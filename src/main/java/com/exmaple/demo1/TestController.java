@@ -16,9 +16,12 @@ public class TestController {
     @Value("${spring.profiles.active}")
     private String activeProfile;
 
+    @Value("${app.version}")
+    private String appVersion;
+
     @RequestMapping("/hello")
     public ResponseEntity<Object> getHello() {
-        log.info("Accessing via Hello. Env " + activeProfile.toUpperCase() + " at " + new Date());
+        log.info("Accessing via Hello. AppVersion " + appVersion + ". Env " + activeProfile.toUpperCase() + " at " + new Date());
         return ResponseEntity.ok(new Hello("Hello "));
     }
 }
