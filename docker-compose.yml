@@ -2,7 +2,7 @@ services:
   bic-trust-portal:
     image: bic-trust-portal:latest
     volumes:
-      - ${PWD}/logs:logs
+      - ${PWD}/logs:/logs
     build:
       context: .
       dockerfile: Dockerfile
