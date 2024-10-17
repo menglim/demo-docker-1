@@ -1,0 +1,11 @@
+services:
+  myapp:
+    image: myapp:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: demo-docker-1
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
