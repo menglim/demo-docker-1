@@ -1,6 +1,6 @@
 services:
-  myapp:
-    image: myapp:latest
+  bic-trust-portal:
+    image: bic-trust-portal:latest
     volumes:
       - ${PWD}/logs:logs
     build:
