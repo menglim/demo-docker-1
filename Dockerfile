@@ -51,5 +51,5 @@ ENV JAVA_HOME=/opt/java/openjdk
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 COPY --from=jre-build /javaruntime $JAVA_HOME
 
-COPY /app/target/*.jar /app.jar
-CMD ["java", "-jar", "/opt/app/app.jar"]
+COPY --from=build /app/target/*.jar /app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
