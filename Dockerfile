@@ -43,6 +43,7 @@ RUN $JAVA_HOME/bin/jlink \
          --no-header-files \
          --compress=2 \
          --output /javaruntime
+WORKDIR /app
 
 # Define your base image
 FROM debian:stretch-slim
@@ -50,6 +51,5 @@ ENV JAVA_HOME=/opt/java/openjdk
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 COPY --from=jre-build /javaruntime $JAVA_HOME
 
-RUN mkdir /opt/app
-COPY target/*.jar /opt/app/app.jar
+COPY /app/target/*.jar /app.jar
 CMD ["java", "-jar", "/opt/app/app.jar"]
