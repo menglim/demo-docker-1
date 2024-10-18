@@ -34,7 +34,7 @@
 
 
 # Custom Java runtime using jlink in a multi-stage container build
-FROM eclipse-temurin:17 as jre-build
+FROM eclipse-temurin:17 AS jre-build
 # Create a custom Java runtime
 RUN $JAVA_HOME/bin/jlink \
          --add-modules jdk.unsupported,java.base,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument \
